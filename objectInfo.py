@@ -1,8 +1,9 @@
 class Rater:
-    def __init__(self, UserId, Email, rName, JoinDate, rType, Reputation):
+    def __init__(self, UserId, Email, rName, Password, JoinDate, rType, Reputation):
         self.UserId = UserId
         self.Email = Email
         self.rName = rName
+        self.Password = Password
         self.JoinDate = JoinDate
         self.rType = rType
         self.Reputation = Reputation

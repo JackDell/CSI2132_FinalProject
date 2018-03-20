@@ -29,12 +29,12 @@ def initializeDatabase():
 
 def updateDatabase():
     """ Updates the database, needed to be called if table info changes """
-    cur.execute("DROP TABLE IF EXISTS Rater")
-    cur.execute("DROP TABLE IF EXISTS Restaurant")
-    cur.execute("DROP TABLE IF EXISTS Rating")
-    cur.execute("DROP TABLE IF EXISTS Hours")
-    cur.execute("DROP TABLE IF EXISTS MenuItem")
-    cur.execute("DROP TABLE IF EXISTS RatingItem")
+    cur.execute("DROP TABLE IF EXISTS Rater CASCADE")
+    cur.execute("DROP TABLE IF EXISTS Restaurant CASCADE")
+    cur.execute("DROP TABLE IF EXISTS Rating CASCADE")
+    cur.execute("DROP TABLE IF EXISTS Hours CASCADE")
+    cur.execute("DROP TABLE IF EXISTS MenuItem CASCADE")
+    cur.execute("DROP TABLE IF EXISTS RatingItem CASCADE")
     initializeDatabase()
 
 #################
@@ -64,6 +64,10 @@ def saveMenuItem(x):
 def saveRatingItem(x):
     cur.execute("INSERT INTO RatingItem(UserID, ItemRateDate, ItemID, Rating, Comment) VALUES(%s, %s, %s, %s, %s)", [x.UserId, x.ItemRateDate, x.ItemId, x.Rating, x.Comment])
     conn.commit()
+
+#####################
+# Functional Methods
+#####################
 
 def test():
     updateDatabase()

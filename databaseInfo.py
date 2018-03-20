@@ -2,6 +2,7 @@ CREATE_RATER = """CREATE TABLE Rater(
     UserID varchar(50) PRIMARY KEY,
 	Email varchar(50),
 	rName varchar(50),
+    Password varchar(50),
 	JoinDate DATE,
 	rType varchar(50),
 	Reputation integer CHECK (reputation <=5)
@@ -35,13 +36,13 @@ CloseTime time
 )"""
 
 CREATE_MENU_ITEM = """CREATE TABLE MenuItem(
-	ItemID integer PRIMARY KEY,
+	ItemId integer PRIMARY KEY,
 	ItemName varchar(50),
 	Category text[],
 	Description varchar(500),
 	ItemType varchar(50),
 	ItemPrice decimal,
-	RestaurantID integer REFERENCES Restaurant(RestaurantID)
+	RestaurantId integer REFERENCES Restaurant(RestaurantID)
 )"""
 
 CREATE_RATING_ITEM = """CREATE TABLE RatingItem (
