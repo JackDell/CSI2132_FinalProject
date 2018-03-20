@@ -1,10 +1,14 @@
 {% extends "bootstrap/base.html" %}
 
 {% block content %}
-<form method="POST" action="{{ url_for('register') }}">
+<form method="POST" action="{{ url_for('login') }}">
     {{ form.csrf_token }}
     {{ form.email.label }}
     {{ form.email }}
+    {{ form.nickname.label }}
+    {{ form.nickname }}
+    {{ form.rType.label }}
+    {{ form.rType }}
     {{ form.password.label }}
     {{ form.password }}
     <input type="submit" value="Submit">
