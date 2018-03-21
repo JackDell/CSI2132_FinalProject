@@ -18,7 +18,7 @@ class registrationForm(FlaskForm):
     nickname = StringField("Alias", validators=[InputRequired()])
 
     choices = [("Blog", "Blog"), ("Online", "Online"), ("Food Critic", "Food Critic"), ("Other", "Other")]
-    rType = SelectField("Type", choices=choices)
+    rType = SelectField("Type", choices=choices, validators=[InputRequired()])
 
     password = PasswordField("Password", validators=[InputRequired()])
 
@@ -29,6 +29,13 @@ def index():
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     form = registrationForm()
+
+    if form.validate_on_submits():
+        e = form.email.data
+        n = form.nickname.data
+        t = form.rType.data
+        p = form.password.data
+
     return render_template("registration.html", form=form)
 
 @app.route("/login", methods=['GET', 'POST'])
