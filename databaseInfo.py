@@ -1,7 +1,7 @@
 CREATE_RATER = """CREATE TABLE Rater(
     UserID varchar(50) PRIMARY KEY,
 	Email varchar(50),
-	rName varchar(50),
+	Name varchar(50),
     Password varchar(50),
 	JoinDate DATE,
 	rType varchar(50),
