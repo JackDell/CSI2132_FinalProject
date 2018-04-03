@@ -11,7 +11,7 @@ import uuid
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '54321'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://jdell012:Compsci1234@www.eecs.uottawa.ca:15432/jdell012'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://jdell012:####@www.eecs.uottawa.ca:15432/jdell012'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 bootstrap = Bootstrap(app)
@@ -122,16 +122,24 @@ def logout():
 
 @app.route("/restaurants")
 def restaurants():
-    return render_template("restaurant_view.html", restaurants=getRestaurantDictionary())
+    return render_template("restaurant_list.html", restaurants=getRestaurantDictionary())
+
+@app.route("/restaurant_view/<RestId>")
+def viewRestaurant(RestId):
+    print(RestId)
+    return render_template("restaurant_view.html", r=restToDict(Restaurant.query.filter_by(RestId=RestId).first()))
 
 # Logic functions
 
 def getRestaurantDictionary():
     returnList = []
     for r in Restaurant.query.all():
-        returnList.append({"RestName" : r.RestName, "Address" : r.Address, "Number" : r.PhoneNumber})
+        returnList.append({"RestId" : r.RestId, "RestName" : r.RestName, "Address" : r.Address, "Number" : r.PhoneNumber})
 
     return returnList
+
+def restToDict(r):
+    return {"RestId" : r.RestId, "RestName" : r.RestName, "RestType" : r.RestType, "Address" : r.Address, "Number" : r.PhoneNumber, "URL" : r.URL, "Manager" : r.ManagerName, "OpeningDate" : r.OpeningDate}
 
 def createData():
 
