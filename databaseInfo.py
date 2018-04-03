@@ -52,3 +52,34 @@ CREATE_RATING_ITEM = """CREATE TABLE RatingItem (
 	Rating integer CHECK (5>=rating),
 	Comment varchar(500)
 )"""
+
+
+
+
+
+
+
+class Restaurant(db.Model):
+    RestId = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    RestName = db.Column(db.String(50))
+    RestType = db.Column(db.String(100))
+    Address = db.Column(db.String(100))
+    PhoneNumber = db.Column(db.String(16))
+    URL = db.Column(db.String(150))
+    ManagerName = db.Column(db.String(50))
+    OpeningDate = db.Column(db.DateTime)
+
+
+
+
+
+INSERT INTO restaurant(RestName, RestType, Address, PhoneNumber, URL, ManagerName, OpeningDate) VALUES("McDonalds", "Fast Food", "123 Main Street, Toronto", "905-123-4567", "McDonalds.com", "Barb", "2002-03-14")
+
+
+
+
+
+
+
+
+

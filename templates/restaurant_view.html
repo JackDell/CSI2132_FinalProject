@@ -1,0 +1,26 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Restaurant Rater
+{% endblock %}
+
+{% block content %}
+
+<div class="container" style="">
+    <div class="page-header">
+        <h1>Restaurant List</h1>
+    </div>
+    <div class="list-group">
+        {% for r in restaurants %}
+            <a href="#" class="list-group-item">
+                <h4 class="list-group-item-heading">{{ r.RestName }}</h4>
+                <p class="list-group-item-text">{{ r.Address }}</p>
+                <p class="list-group-item-text">{{ r.Number }}</p>
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
