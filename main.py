@@ -11,7 +11,7 @@ import uuid
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '54321'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://jdell012:####@www.eecs.uottawa.ca:15432/jdell012'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://jdell012:***@www.eecs.uottawa.ca:15432/jdell012'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 bootstrap = Bootstrap(app)
@@ -70,6 +70,16 @@ class RegistrationForm(FlaskForm):
     password = PasswordField("Password", validators=[InputRequired()])
     submit = SubmitField("Create Account")
 
+class RestaurantForm(FlaskForm):
+    RName = StringField("Restaurant Name", validators=[InputRequired()])
+    types = [("Fast Food", "Fast Food"), ("Chinese", "Chinese"), ("Italian", "Italian"), ("Greek", "Greek"), ("Indian", "Indian"), ("Mexican", "Mexican"), ("Thai", "Thai"), ("Spanish", "Spanish"), ("American", "American"), ("Other", "Other")]
+    RType = SelectField("Type", choices=types, validators=[InputRequired()])
+    Address = StringField("Address", validators=[InputRequired()])
+    Phone = StringField("Phone Number", validators=[InputRequired()])
+    URL = StringField("Website URL", validators=[InputRequired()])
+    Manager = StringField("Manager", validators=[InputRequired()])
+    OpeningDate = StringField("Date of Opening", validators=[InputRequired()])
+    submit = SubmitField("Create Restaurant")
 
 # Beginning of flask
 @app.route("/")
@@ -102,7 +112,6 @@ def login():
 
     form = LoginForm()
 
-    print(getRestaurantDictionary())
     # If the form is filled out and submitted properly, it will validate
     if form.validate_on_submit():
         user = Rater.query.filter_by(Email=form.email.data).first()
@@ -128,6 +137,22 @@ def restaurants():
 def viewRestaurant(RestId):
     print(RestId)
     return render_template("restaurant_view.html", r=restToDict(Restaurant.query.filter_by(RestId=RestId).first()))
+
+@app.route("/add_restaurant", methods=['GET', 'POST'])
+def addRestaurant():
+    form = RestaurantForm()
+
+    if form.validate_on_submit():
+        r = Restaurant(RestName=form.RName.data, RestType=form.RType.data, Address=form.Address.data, 
+                        PhoneNumber=form.Phone.data, URL=form.URL.data, ManagerName=form.Manager.data, 
+                        OpeningDate=form.OpeningDate.data)
+        db.session.add(r)
+        db.session.commit()
+
+        return redirect(url_for('restaurants'))
+
+    return render_template("add_restaurant.html", form=form)
+
 
 # Logic functions
 

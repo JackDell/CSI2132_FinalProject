@@ -10,6 +10,7 @@ Restaurant Rater
 <div class="container" style="">
     <div class="page-header">
         <h1>Restaurant List</h1>
+        <button onclick="window.location.href='{{ url_for('addRestaurant') }}'" type="button" class="btn btn-success">Don't see your restaurant? Click Here!</button>
     </div>
     <div class="list-group">
         {% for r in restaurants %}
