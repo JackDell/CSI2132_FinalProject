@@ -7,17 +7,16 @@ Restaurant Rater
 
 {% block content %}
 
-<div class="container" style="width:50%;margin: 0 auto">
+<div class="container" style="">
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Add Restaurant</h3>
+            <h3 class="panel-title">New Rating</h3>
         </div>
         <div class="panel-body">
-            <form method="POST" action="{{ url_for('addRestaurant') }}">
-                {{ wtf.quick_form(form, button_map={'submit':'success'}) }}
-            </form>
+            {{ wtf.quick_form(form, button_map={'submit':'success'}) }}
         </div>
     </div>
 </div>
 
 {% endblock %}
+

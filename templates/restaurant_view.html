@@ -21,12 +21,54 @@ Restaurant Rater
             <br>
             {{ r.OpeningDate }}
             <br><br>
-            <button type="button" class="btn btn-default" href="#">
+            <button type="button" class="btn btn-default" onclick="window.location.href='{{ url_for('review', RestId=r.RestId) }}'">
                 <div class="glyphicon glyphicon-pencil"></div>
                 <h4>Write Review</h4>
             </button>
+            <br>
+            <ul class="list-group">
+                {% for item in MenuItems %}
+                    <li class="list-group-item">
+                        <h4> {{ item.Name }} <h4>
+                        <p> {{ item.Type }} </p>
+                        <p> {{ item.Category }} </p>
+                        <p> {{ item.Desc }} </p>
+                        <p> {{ item.Price }} </p>
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+    {% for rating in Ratings %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h4> Price </h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{ rating.Price * 20 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ rating.Price * 20 }}%">
+                    </div>
+                </div>
+                <h4> Food </h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" aria-valuenow="{{ rating.Food * 20 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ rating.Food * 20 }}%">
+                    </div>
+                </div>
+                <h4> Mood </h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-warning progress-bar-striped" role="progressbar" aria-valuenow="{{ rating.Mood * 20 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ rating.Mood * 20 }}%">
+                    </div>
+                </div>
+                <h4> Staff </h4>
+                <div class="progress">
+                    <div class="progress-bar progress-bar-danger progress-bar-striped" role="progressbar" aria-valuenow="{{ rating.Staff * 20 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ rating.Staff * 20 }}%">
+                    </div>
+                </div>
+                <h4> Comments </h4>
+                <div class="well">
+                    <p> {{ rating.Comments }} </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 </div>
 
 {% endblock %}
